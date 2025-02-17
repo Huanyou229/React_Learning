@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>02_JSX基本语法</title>
+  </head>
+  <body>
+    <div id="root"></div>
+    <!-- CDN引入，依赖三个包：react、react-dom、babel -->
+    <script src="./lib/react.js"></script>
+    <script src="./lib/react-dom.js"></script>
+    <script src="./lib/babel.js"></script>
+
+    <script type="text/babel">
+      const msg = "zhangsan";
+      const n = 10;
+      const title = "哪吒闹海";
+      const imgURl =
+        "https://public-cdn-oss.mosoteach.cn/avatar/2023/E9/822131f0a1e63a228eb1a2df2b619fe3.jpg?v=1735562479&x-oss-process=style/s300x300";
+      const href = "https://www.baidu.com";
+      const objStyle = { color: "red", fontSize: "30px" };
+      // 编写 React代码(jsx语法)
+      // jsx语法转换为普通的JavaScript代码，要依靠 babel
+      const element = (
+        <div>
+          {/*JSX的注释写法*/}
+          <h2>Hello JSX</h2>
+          <h3>{msg}</h3>
+          <h4>计算：{10 * n}</h4>
+          <h1 title={title}>我是h1元素</h1>
+          <img src={imgURl} alt="图片" style={{ width: "40px" }} />
+          <p>
+            <a href={href}>百度一下</a>
+          </p>
+          <div style={objStyle}>有样式的文字</div>
+        </div>
+      );
+
+      const root = ReactDOM.createRoot(document.querySelector("#root"));
+      root.render(element);
+    </script>
+  </body>
+</html>

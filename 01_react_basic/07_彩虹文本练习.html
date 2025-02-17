@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>07_彩虹文本练习</title>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script src="./lib/react.js"></script>
+    <script src="./lib/react-dom.js"></script>
+    <script src="./lib/babel.js"></script>
+
+    <script type="text/babel">
+      const root = ReactDOM.createRoot(document.querySelector("#root"));
+
+      // 彩虹颜色的数组
+      const colors = [
+        "red",
+        "orange",
+        "yellow",
+        "green",
+        "blue",
+        "indigo",
+        "violet",
+      ];
+
+      // 计数器初始化
+      let clickCount = 0;
+      let currentColorIndex = 0;
+
+      // 点击按钮的函数
+      const btnClick = () => {
+        clickCount += 1;
+        currentColorIndex = clickCount % colors.length; // 确保颜色循环
+
+        // 渲染页面
+        rootRender();
+      };
+
+      // 渲染函数
+      const rootRender = () => {
+        // 文本和颜色
+        const textColor = colors[currentColorIndex];
+        const textMessage = `你已经点击了 ${clickCount} 次`;
+
+        // 成就提示
+        const achievementMessage =
+          clickCount > 10 ? (
+            <div>解锁成就！你已经点击了超过 10 次！</div>
+          ) : null;
+
+        root.render(
+          <div>
+            <h2 style={{ color: textColor }}>{textMessage}</h2>
+            <button onClick={btnClick}>点击我变换彩虹颜色🌈</button>
+            {achievementMessage}
+          </div>
+        );
+      };
+
+      // 初始渲染
+      rootRender();
+    </script>
+  </body>
+</html>

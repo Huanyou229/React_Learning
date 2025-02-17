@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>03_JSX条件渲染</title>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script src="./lib/react.js"></script>
+    <script src="./lib/react-dom.js"></script>
+    <script src="./lib/babel.js"></script>
+
+    <script type="text/babel">
+      const message = "Hello World";
+      const isReady = true;
+      // 1.条件判断方式一：使用if进行条件判断
+      let element = null;
+      if (isReady) {
+        element = <h2>准备开始比赛吧</h2>;
+      } else {
+        element = <h1>请提前做好准备！</h1>;
+      }
+      // 1.条件判断方式二：使用三元运算符
+      //   element = (
+      //     <div>{isReady ? <button>开始战斗！</button> : <h3>赶紧准备！</h3>}</div>
+      //   );
+      const root = ReactDOM.createRoot(document.querySelector("#root"));
+      root.render(element);
+    </script>
+  </body>
+</html>
