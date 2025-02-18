@@ -1,0 +1,19 @@
+.side-nav {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  background: rgba(255, 255, 255, 0.8);
+  padding: 20px;
+}
+
+.nav-item {
+  margin-bottom: 10px;
+  padding: 10px;
+  cursor: pointer;
+  border-radius: 5px;
+  background: #f0f0f0;
+}
+
+.nav-item:hover {
+  background: #e0e0e0;
+}

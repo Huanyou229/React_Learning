@@ -1,0 +1,92 @@
+html,
+body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  width: 100%;
+}
+
+.browser-home {
+  display: flex;
+  background: url("../resource/bg.webp") no-repeat center center;
+  background-size: cover;
+  height: 100vh;
+  font-family: Arial, sans-serif;
+  overflow: hidden; /* 确保页面不会滚动 */
+}
+
+.side-nav {
+  width: 150px;
+  background: rgba(255, 255, 255, 0.8);
+  padding: 20px;
+}
+
+.nav-item {
+  margin-bottom: 10px;
+  padding: 10px;
+  cursor: pointer;
+  border-radius: 5px;
+  background: #f0f0f0;
+}
+
+.nav-item:hover {
+  background: #e0e0e0;
+}
+
+.content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
+}
+
+.time {
+  font-size: 48px;
+  margin-bottom: 10px;
+}
+
+.date-info {
+  display: flex;
+  font-size: 14px;
+  margin-bottom: 20px;
+}
+
+.date-info-item {
+  margin: 0 10px;
+}
+
+/* 搜索框样式 */
+.search-box {
+  width: 80%;
+  padding: 10px;
+  font-size: 16px;
+  border: 1px solid #ccc; /* 设置默认边框颜色 */
+  border-radius: 5px;
+  margin-bottom: 60px;
+  outline: none; /* 去除默认的焦点边框 */
+}
+
+/* 针对点击状态的搜索框 */
+.search-box:focus {
+  border: 1px solid #007bff; /* 点击时的边框颜色 */
+  box-shadow: 0 0 5px rgba(0, 123, 255, 0.5); /* 添加轻微的阴影效果 */
+  outline: none; /* 再次确保没有默认的轮廓 */
+}
+
+.shortcut-grid {
+  display: grid;
+  grid-template-columns: repeat(8, 1fr);
+  gap: 20px;
+  width: 80%;
+}
+.saying {
+  font-size: small;
+  margin-top: 80px;
+  color: white;
+}
+.author {
+  font-size: small;
+  margin-top: 10px;
+  color: white;
+}
