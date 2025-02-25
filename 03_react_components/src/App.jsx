@@ -15,7 +15,7 @@
 // import Button1 from "./components/Button1";
 // import InputParent from "./components/InputParent";
 // import RegistPage from "./components/RegistPage";
-// import Card from "./components/card/Card";
+// import Card from "./components/solt-card/Card";
 // import TaskPage from "./components/TaskPage";
 
 // React中的三种样式
@@ -23,7 +23,10 @@
 
 // React中的插槽
 // import NavBar from "./components/navbar/NavBar";
-import NavBar2 from "./components/navbar/NavBar2";
+// import NavBar2 from "./components/navbar/NavBar2;
+
+//图书管理系统
+import BookApp from "./components/book/BookApp";
 
 const APP = () => {
   // const handleClick = () => {
@@ -67,11 +70,12 @@ const APP = () => {
       </NavBar> */}
 
       {/* 2.使⽤props实现插槽 */}
-      <NavBar2
+      {/* <NavBar2
         leftSlot={<button>按钮</button>}
         centerSlot={<h2>呵呵呵</h2>}
         rightSlot={<i>斜体2</i>}
-      />
+      /> */}
+      <BookApp />
     </>
   );
 };
