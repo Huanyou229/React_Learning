@@ -1,5 +1,5 @@
 import PropTypes from "prop-types";
-import "./Card.css"; // 引入样式文件
+import "./Card.css"; 
 
 const Card = ({ header, body, footer }) => {
   return (

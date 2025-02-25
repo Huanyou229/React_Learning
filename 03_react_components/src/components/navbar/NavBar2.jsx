@@ -1,4 +1,5 @@
 import "./style.css";
+// eslint-disable-next-line react/prop-types
 const NavBar2 = ({ leftSlot, centerSlot, rightSlot }) => {
   return (
     <div className="nav-bar">
