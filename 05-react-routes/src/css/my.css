@@ -1,0 +1,50 @@
+/* 用户菜单整体样式 */
+.user-menu {
+  width: 200px;
+  padding: 10px 0;
+  border-radius: 8px;
+}
+
+/* 用户信息区域 */
+.user-nickname {
+  text-align: center;
+  padding-bottom: 5px;
+  cursor: default;
+}
+
+/* 用户名文本 */
+.user-name {
+  display: block;
+  margin-top: 5px;
+  font-size: 16px;
+}
+
+/* 分割线 */
+.user-divider {
+  margin: 8px 0;
+}
+
+/* 用户信息项 */
+.user-info {
+  padding-left: 16px;
+  font-size: 14px;
+  display: flex;
+  align-items: center;
+}
+
+/* 退出按钮样式 */
+.logout-btn {
+  text-align: center;
+  color: red !important;
+  font-weight: bold;
+  transition: background 0.3s ease;
+}
+
+.logout-btn:hover {
+  background-color: rgba(255, 0, 0, 0.1);
+}
+
+/* 退出图标样式 */
+.logout-icon {
+  margin-right: 5px;
+}
