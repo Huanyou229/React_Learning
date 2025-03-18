@@ -21,10 +21,10 @@ const AppRoutes = () => {
       <Route path="/login" element={<Login />} />
 
       {/* 使用 Layout 组件包含导航栏和其他页面 */}
-      <Route path="/*" element={<Layout />}>
+      <Route path="/" element={<Layout />}>
         <Route index element={<Home />} />
-        <Route path="about" element={<About />} />
-        <Route path="dashboard" element={<Dashboard />}>
+        <Route path="/about" element={<About />} />
+        <Route path="/dashboard" element={<Dashboard />}>
           <Route index element={<Profile />} />
           <Route path="profile" element={<Profile />}>
             <Route index element={<Fans />} />
@@ -33,8 +33,8 @@ const AppRoutes = () => {
           </Route>
           <Route path="setting" element={<Setting />} />
         </Route>
-        <Route path="book/:bookId" element={<Book />} />
-        <Route path="blog/:id" element={<BlogDetails />} />
+        <Route path="/book/:bookId" element={<Book />} />
+        <Route path="/blog/:id" element={<BlogDetails />} />
       </Route>
 
       {/* 404 页面 */}
