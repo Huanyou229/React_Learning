@@ -1,0 +1,74 @@
+.index {
+  background-color: #fff;
+  padding: 20px;
+
+  .at-form {
+    margin-bottom: 20px;
+  }
+
+  .at-input {
+    margin-bottom: 15px;
+  }
+
+  .button-group {
+    display: flex;
+    gap: 15px;
+    margin-top: 30px;
+
+    .at-button {
+      flex: 1;
+
+      &--primary {
+        background: #c678d2;
+        border-color: #c678d2;
+
+        &:active {
+          background: darken(#c678d2, 10%);
+          border-color: darken(#c678d2, 10%);
+        }
+      }
+    }
+  }
+
+  .name-card-container {
+    margin-top: 30px;
+    background: linear-gradient(135deg, #b06ab3, #4568dc);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+    border-radius: 12px;
+    padding: 20px;
+
+    .at-card__header {
+      color: #ffffff;
+    }
+
+    &:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15);
+    }
+
+    .card-content {
+      padding: 20px;
+      text-align: left;
+      color: #fff;
+
+      .avatar {
+        width: 120px;
+        height: 120px;
+        border-radius: 50%;
+        margin-bottom: 25px;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+        border: 3px solid rgba(255, 255, 255, 0.8);
+      }
+
+      .info-item {
+        margin: 16px 0;
+        font-size: 32px;
+        transition: color 0.2s ease;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+      }
+    }
+  }
+}
