@@ -7,3 +7,5 @@
 - 05_react_routes React Router 路由学习
 - 06_react_fetch React 网络请求学习
 - 07_react_state React 状态管理学习
+- 08-notes-app 笔记项目实战
+- 09-taro-basic Taro 基础学习
