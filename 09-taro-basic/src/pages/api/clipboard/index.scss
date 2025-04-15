@@ -1,0 +1,65 @@
+.clipboard-page {
+  padding: 40px 30px;
+  background: #f7f8fa;
+  min-height: 100vh;
+  box-sizing: border-box;
+
+  .title {
+    font-size: 28px;
+    font-weight: bold;
+    text-align: center;
+    margin-bottom: 40px;
+    color: #333;
+  }
+
+  .input-box {
+    background: #fff;
+    border-radius: 12px;
+    padding: 20px;
+    font-size: 26px;
+    border: 1px solid #e5e5e5;
+    margin-bottom: 30px;
+  }
+
+  .btn-group {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 40px;
+
+    .btn {
+      flex: 1;
+      margin: 0 10px;
+      font-size: 26px;
+      border-radius: 8px;
+    }
+
+    .copy {
+      background: #4caf50;
+      color: #fff;
+    }
+
+    .paste {
+      background: #2196f3;
+      color: #fff;
+    }
+  }
+
+  .result-box {
+    background: #fff;
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.03);
+
+    .label {
+      font-size: 26px;
+      font-weight: 500;
+      color: #555;
+    }
+
+    .content {
+      margin-top: 10px;
+      font-size: 28px;
+      color: #222;
+    }
+  }
+}

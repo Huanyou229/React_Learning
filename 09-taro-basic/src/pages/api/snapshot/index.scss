@@ -1,0 +1,51 @@
+.snapshot-page {
+  padding: 40px 30px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: linear-gradient(to bottom, #e6f7ff, #ffffff);
+  height: 100vh;
+
+  .icon {
+    font-size: 80px;
+    margin-bottom: 20px;
+  }
+
+  .title {
+    font-size: 26px;
+    font-weight: bold;
+    margin-bottom: 10px;
+    color: #333;
+  }
+
+  .desc {
+    font-size: 16px;
+    color: #666;
+    margin-bottom: 30px;
+    text-align: center;
+  }
+
+  .snapshot-btn {
+    background-color: #1890ff;
+    color: #fff;
+    font-size: 16px;
+    padding: 12px 36px;
+    border-radius: 24px;
+    margin-bottom: 20px;
+  }
+
+  .message {
+    font-size: 16px;
+    color: #fa541c;
+    margin: 10px 0;
+    text-align: center;
+  }
+
+  .preview-img {
+    width: 300px;
+    height: 200px;
+    margin-top: 20px;
+    border-radius: 12px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+  }
+}

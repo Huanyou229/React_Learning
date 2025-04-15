@@ -1,8 +1,13 @@
 {
+  // 继承taro/react的配置
   "extends": ["taro/react"],
+  // 规则
   "rules": {
+    // 关闭react/jsx-uses-react规则
     "react/jsx-uses-react": "off",
+    // 关闭react/react-in-jsx-scope规则
     "react/react-in-jsx-scope": "off",
+    // 设置jsx-quotes规则，错误时使用双引号
     "jsx-quotes": ["error", "prefer-double"]
   }
 }

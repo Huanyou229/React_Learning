@@ -1,0 +1,41 @@
+.calendar-page {
+  padding: 40rpx;
+  display: flex;
+  flex-direction: column;
+  align-items: center; // ✅ 居中子元素（按钮和标题）
+
+  .title {
+    font-size: 48rpx;
+    font-weight: 600;
+    margin-bottom: 40rpx;
+    color: #333;
+    text-align: center; // ✅ 文字居中
+  }
+
+  .add-btn,
+  .repeat-btn {
+    width: 300px;
+    background: linear-gradient(135deg, #42a5f5, #478ed1);
+    color: #fff;
+    font-size: 30rpx;
+    padding: 20rpx;
+    border-radius: 12rpx;
+    margin-bottom: 20rpx;
+    text-align: center;
+  }
+
+  .repeat-btn {
+    background: linear-gradient(135deg, #66bb6a, #43a047);
+  }
+
+  .info {
+    background: #f2f2f2;
+    padding: 20rpx;
+    border-radius: 10rpx;
+    color: #555;
+    margin-top: 30rpx;
+    font-size: 38rpx;
+    line-height: 1.8;
+    width: 100%;
+  }
+}
