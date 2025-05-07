@@ -8,8 +8,8 @@ import categoryRoutes from './routes/categoryRoutes.js';
 dotenv.config();
 const app = express();
 
-const allowedOrigins = ['http://43.142.252.113:7070'];
-// const allowedOrigins = ['http://localhost:5173'];
+// const allowedOrigins = ['http://43.142.252.113:7070'];
+const allowedOrigins = ['http://localhost:5173'];
 app.use(
   cors({
     origin: function (origin, callback) {
