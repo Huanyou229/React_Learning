@@ -10,6 +10,7 @@ import {
   Avatar,
   Space,
   Tooltip,
+  message,
 } from "antd";
 import {
   MenuFoldOutlined,
@@ -40,12 +41,14 @@ import {
 import { getCategories } from "@/api/categoryApi";
 import { useNavigate } from "react-router-dom";
 import { useStore } from "@/store/userStore";
+import CreateCategory from "@/pages/category/CreateCategory";
 
 const Sidebar = () => {
   const [current, setCurrent] = useState("1");
   const [collapsed, setCollapsed] = useState(false);
   const [categories, setCategories] = useState([]);
   const navigate = useNavigate();
+  const [categoryFormOpen, setCategoryFormOpen] = useState(false);
 
   useEffect(() => {
     const fetchCategories = async () => {
@@ -57,7 +60,38 @@ const Sidebar = () => {
       }
     };
     fetchCategories();
+
+    // 监听知识库更新事件
+    const handleCategoryUpdate = () => {
+      fetchCategories();
+    };
+    window.addEventListener("categoryUpdated", handleCategoryUpdate);
+
+    return () => {
+      window.removeEventListener("categoryUpdated", handleCategoryUpdate);
+    };
   }, []);
+
+  const handleCreateClick = (key) => {
+    if (!user) {
+      message.warning("请先登录");
+      navigate("/login");
+      return;
+    }
+    if (key === "0") {
+      navigate("/create-note");
+    }
+    // 其他 key 的逻辑可以根据需要补充
+  };
+
+  const handleNewCategory = () => {
+    if (!user) {
+      message.warning("请先登录");
+      navigate("/login");
+      return;
+    }
+    setCategoryFormOpen(true);
+  };
 
   const items = [
     {
@@ -96,11 +130,14 @@ const Sidebar = () => {
       label: "知识库",
       icon: <BookOutlined style={{ fontSize: "16px" }} />,
       className: "mt-4",
+      onClick: () => {
+        navigate("/categoryList");
+      },
       children: categories.map((category) => ({
         key: category.id,
         label: category.name,
         icon: <BookFilled style={{ color: "#1890ff", fontSize: "18px" }} />,
-        onClick: () => navigate(`/notes/categories/${category.id}`),
+        // onClick: () => navigate(`/notes/categories/${category.id}`),
       })),
     },
   ];
@@ -168,6 +205,7 @@ const Sidebar = () => {
       ),
       label: "文档",
       key: "0",
+      onClick: () => handleCreateClick("0"),
     },
     {
       icon: (
@@ -200,6 +238,7 @@ const Sidebar = () => {
       icon: <BookFilled style={{ color: "#679ff4", fontSize: "16px" }} />,
       label: "知识库",
       key: "4",
+      onClick: () => handleNewCategory(), // 新建知识库
     },
     {
       type: "divider",
@@ -233,114 +272,129 @@ const Sidebar = () => {
     });
   };
   const { user, logout } = useStore();
+
   return (
-    <div style={commonStyle}>
+    <>
+      <CreateCategory
+        open={categoryFormOpen}
+        onCancel={() => setCategoryFormOpen(false)}
+        onSuccess={() => {
+          window.dispatchEvent(new Event("categoryUpdated"));
+        }}
+      />
       <div style={commonStyle}>
-        <div className="flex items-center justify-between pl-2 py-2 w-full">
-          <div className="flex items-center">
-            <img
-              src="/yuque.svg"
-              alt="羽雀"
-              className="w-7 h-7"
-              style={{ marginRight: collapsed ? 0 : "0.5rem" }}
-            />
+        <div style={commonStyle}>
+          <div className="flex items-center justify-between pl-2 py-2 w-full">
+            <div className="flex items-center">
+              <img
+                src="/yuque.svg"
+                alt="羽雀"
+                className="w-7 h-7"
+                style={{ marginRight: collapsed ? 0 : "0.5rem" }}
+              />
+              {!collapsed && (
+                <div className="flex items-center">
+                  <Typography.Title
+                    level={4}
+                    className="m-0"
+                    style={{ color: "#000" }}
+                  >
+                    羽雀
+                  </Typography.Title>
+                  <Dropdown menu={{ items: menu1 }} trigger={["hover"]}>
+                    <span className="cursor-pointer">
+                      <DownOutlined />
+                    </span>
+                  </Dropdown>
+                </div>
+              )}
+            </div>
             {!collapsed && (
-              <div className="flex items-center">
-                <Typography.Title
-                  level={4}
-                  className="m-0"
-                  style={{ color: "#000" }}
-                >
-                  羽雀
-                </Typography.Title>
-                <Dropdown menu={{ items: menu1 }} trigger={["hover"]}>
-                  <span className="cursor-pointer">
-                    <DownOutlined />
-                  </span>
-                </Dropdown>
+              <div className=" flex items-center px-2 mr-2">
+                {/* 消息 */}
+                <div className="mr-2">
+                  <Tooltip title="消息中心" className="cursor-pointer">
+                    <span>
+                      <BellOutlined />
+                    </span>
+                  </Tooltip>
+                </div>
+                {/* 头像 */}
+                <div>
+                  {user ? (
+                    <Space>
+                      <Dropdown
+                        menu={{
+                          items: menu2,
+                          onClick: ({ key }) => {
+                            if (key === "4") {
+                              handleLogout();
+                            }
+                          },
+                        }}
+                        trigger={["hover"]}
+                        overlayStyle={{ padding: "10px 0", width: "180px" }}
+                      >
+                        <span style={{ cursor: "pointer" }}>
+                          {user.avatar_url ? (
+                            <Avatar src={user.avatar_url} />
+                          ) : (
+                            <Avatar icon={<UserOutlined />} />
+                          )}
+                        </span>
+                      </Dropdown>
+                    </Space>
+                  ) : (
+                    <Button type="primary" onClick={() => navigate("/login")}>
+                      登录
+                    </Button>
+                  )}
+                </div>
               </div>
             )}
           </div>
-          {!collapsed && (
-            <div className=" flex items-center px-2 mr-2">
-              {/* 消息 */}
-              <div className="mr-2">
-                <Tooltip title="消息中心" className="cursor-pointer">
-                  <span>
-                    <BellOutlined />
-                  </span>
-                </Tooltip>
+          <Button
+            type="primary"
+            onClick={toggleCollapsed}
+            style={{ marginBottom: 16 }}
+          >
+            {collapsed ? <MenuUnfoldOutlined /> : <MenuFoldOutlined />}
+          </Button>
+          <div
+            className="flex items-center  gap-3 px-2"
+            style={{ overflow: "hidden" }}
+          >
+            {!collapsed && (
+              <div className="relative flex-1">
+                <Input
+                  prefix={<SearchOutlined className="text-gray-400" />}
+                  className="w-full bg-gray-200 border-none rounded transition-colors"
+                  placeholder="搜索"
+                />
               </div>
-              {/* 头像 */}
-              <div>
-                {user ? (
-                  <Space>
-                    <Dropdown
-                      menu={{
-                        items: menu2,
-                        onClick: ({ key }) => {
-                          if (key === "4") {
-                            handleLogout();
-                          }
-                        },
-                      }}
-                      trigger={["hover"]}
-                    >
-                      <span style={{ cursor: "pointer" }}>
-                        {user.avatar_url ? (
-                          <Avatar src={user.avatar_url} />
-                        ) : (
-                          <Avatar icon={<UserOutlined />} />
-                        )}
-                      </span>
-                    </Dropdown>
-                  </Space>
-                ) : (
-                  <Button type="primary" onClick={() => navigate("/login")}>
-                    登录
-                  </Button>
-                )}
-              </div>
-            </div>
-          )}
+            )}
+            <Dropdown
+              menu={{ items: menu3 }}
+              trigger={["hover"]}
+              overlayStyle={{ padding: "10px 0", width: "160px" }}
+            >
+              <span className="cursor-pointer">
+                <PlusSquareOutlined className="text-2xl  hover:text-blue-600" />
+              </span>
+            </Dropdown>
+          </div>
+          <Menu
+            onClick={onClick}
+            style={commonStyle}
+            defaultOpenKeys={["home"]}
+            selectedKeys={[current]}
+            mode="inline"
+            inlineCollapsed={collapsed}
+            items={items}
+          />
         </div>
-        <Button
-          type="primary"
-          onClick={toggleCollapsed}
-          style={{ marginBottom: 16 }}
-        >
-          {collapsed ? <MenuUnfoldOutlined /> : <MenuFoldOutlined />}
-        </Button>
-        <div
-          className="flex items-center  gap-3 px-2"
-          style={{ overflow: "hidden" }}
-        >
-          {!collapsed && (
-            <div className="relative flex-1">
-              <Input
-                prefix={<SearchOutlined className="text-gray-400" />}
-                className="w-full bg-gray-200 border-none rounded transition-colors"
-                placeholder="搜索"
-              />
-            </div>
-          )}
-          <Dropdown menu={{ items: menu3 }} trigger={["hover"]}>
-            <span className="cursor-pointer">
-              <PlusSquareOutlined className="text-2xl  hover:text-blue-600" />
-            </span>
-          </Dropdown>
-        </div>
-        <Menu
-          onClick={onClick}
-          style={commonStyle}
-          defaultOpenKeys={["home"]}
-          selectedKeys={[current]}
-          mode="inline"
-          inlineCollapsed={collapsed}
-          items={items}
-        />
       </div>
-    </div>
+    </>
   );
 };
 

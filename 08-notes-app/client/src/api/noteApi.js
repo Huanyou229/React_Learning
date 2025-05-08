@@ -23,3 +23,7 @@ export const updateNote = async (noteId, noteData) => {
 export const deleteNote = async (noteId) => {
   return axiosInstance.delete(`/notes/${noteId}`);
 };
+
+export const getDetailedNotes = async (userId) => {
+  return axiosInstance.get(`/notes/detailed/${userId}`);
+};
