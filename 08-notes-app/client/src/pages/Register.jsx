@@ -21,7 +21,9 @@ const register = () => {
   return (
     <div className="flex justify-center items-center h-screen bg-blue-200">
       <div className="bg-white p-8 rounded-md shadow-lg w-150 mx-auto mt-20">
-        <Title level={2}>注册</Title>
+        <Title level={2} className="text-center">
+          注册
+        </Title>
         <Form onFinish={onFinish}>
           <Form.Item
             name="username"
