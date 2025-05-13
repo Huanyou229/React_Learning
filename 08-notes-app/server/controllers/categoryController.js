@@ -2,12 +2,12 @@ import pool from '../config/db.js';
 
 export const createCategory = async (req, res) => {
   try {
-    const { name } = req.body;
+    const { name, description = '', cover = '' } = req.body;
     const [result] = await pool.query(
-      'INSERT INTO categories (name) VALUES (?)',
-      [name],
+      'INSERT INTO categories (name, description, cover) VALUES (?, ?, ?)',
+      [name, description, cover],
     );
-    res.status(201).json({ id: result.insertId, name });
+    res.status(201).json({ id: result.insertId, name, description, cover });
   } catch (err) {
     res.status(500).json({ error: err.message });
   }
@@ -17,7 +17,7 @@ export const getCategories = async (req, res) => {
   try {
     const [rows] = await pool.query('SELECT * FROM categories');
     res.status(200).json(rows);
-  } catch (error) {
+  } catch (err) {
     res.status(500).json({ error: err.message });
   }
 };
@@ -33,7 +33,7 @@ export const getCategory = async (req, res) => {
     } else {
       res.status(404).json({ message: 'Category not found' });
     }
-  } catch (error) {
+  } catch (err) {
     res.status(500).json({ error: err.message });
   }
 };
@@ -41,13 +41,13 @@ export const getCategory = async (req, res) => {
 export const updateCategory = async (req, res) => {
   try {
     const { id } = req.params;
-    const { name } = req.body;
+    const { name, description = '', cover = '' } = req.body;
     const [result] = await pool.query(
-      'UPDATE categories SET name = ? WHERE id = ?',
-      [name, id],
+      'UPDATE categories SET name = ?, description = ?, cover = ? WHERE id = ?',
+      [name, description, cover, id],
     );
-    res.status(200).json({ id, name });
-  } catch (error) {
+    res.status(200).json({ id, name, description, cover });
+  } catch (err) {
     res.status(500).json({ error: err.message });
   }
 };
@@ -57,7 +57,7 @@ export const deleteCategory = async (req, res) => {
     const { id } = req.params;
     await pool.query('DELETE FROM categories WHERE id = ?', [id]);
     res.status(200).json({ message: 'Category deleted' });
-  } catch (error) {
+  } catch (err) {
     res.status(500).json({ error: err.message });
   }
 };

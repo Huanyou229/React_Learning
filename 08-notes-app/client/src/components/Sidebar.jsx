@@ -37,6 +37,7 @@ import {
   ReconciliationTwoTone,
   ProjectTwoTone,
   GoldTwoTone,
+  LockOutlined,
 } from "@ant-design/icons";
 import { getCategories } from "@/api/categoryApi";
 import { useNavigate } from "react-router-dom";
@@ -135,8 +136,16 @@ const Sidebar = () => {
       },
       children: categories.map((category) => ({
         key: category.id,
-        label: category.name,
+        label: (
+          <div className="flex items-center">
+            {category.name}
+            <span className="text-gray-500 font-medium ml-sm">
+              <LockOutlined />
+            </span>
+          </div>
+        ),
         icon: <BookFilled style={{ color: "#1890ff", fontSize: "18px" }} />,
+
         // onClick: () => navigate(`/notes/categories/${category.id}`),
       })),
     },
