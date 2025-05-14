@@ -70,8 +70,8 @@ const NoteList = () => {
   return (
     <div className="w-full">
       {notes.map((item) => (
-        <div key={item.id}>
-          <div className="flex items-center justify-between border-b border-gray-200">
+        <div key={item.id} className="hover:bg-gray-100">
+          <div className="flex items-center justify-between border-b border-gray-200 py-4 px-2 ">
             {/* 图标 + 标题 */}
             <div className="flex items-center space-x-2 w-1/3 min-w-0">
               <FileTextTwoTone
@@ -87,7 +87,7 @@ const NoteList = () => {
             </div>
 
             {/* 作者 / 分类 */}
-            <div className="text-sm text-gray-600 w-1/3 text-right pr-10">
+            <div className="text-sm text-gray-600 w-1/3 text-right pr-100">
               {item.username} / {item.categoryName}
             </div>
 
@@ -109,7 +109,7 @@ const NoteList = () => {
               />
             </div>
           </div>
-          <Divider />
+          <Divider className="!my-0" />
         </div>
       ))}
 

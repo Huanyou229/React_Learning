@@ -12,7 +12,7 @@ import {
   ProjectTwoTone,
   SelectOutlined,
 } from "@ant-design/icons";
-import { Card, Dropdown, message, Segmented, Empty } from "antd";
+import { Card, Dropdown, message, Segmented, Empty, Affix } from "antd";
 import { useNavigate } from "react-router-dom";
 import { useStore } from "@/store/userStore";
 import NoteList from "@/pages/note/NoteList";
@@ -111,7 +111,10 @@ const Home = () => {
   };
   return (
     <div className="flex flex-row h-screen">
-      <Sidebar />
+      <Affix offsetTop={0}>
+        {/* 使用 Affix 组件固定 Sidebar */}
+        <Sidebar />
+      </Affix>
       <div className="flex-1 p-8">
         {/* 开始部分开始 */}
         <div className="text-2xl  mb-6">开始</div>

@@ -79,13 +79,20 @@ const CollapsibleCategoryPanel = ({ title, categories }) => {
                   <Card hoverable className="h-full shadow-sm">
                     <div className="flex items-center mb-2">
                       <BookFilled
-                        style={{ color: "#679ff4", fontSize: "18px" }}
-                        className="mr-2"
+                        style={{ fontSize: "22px" }}
+                        className="mr-2 text-blue-500"
                       />
-                      <span className="text-base font-medium">{item.name}</span>
-                      <span className="text-gray-500 font-medium ml-sm">
-                        <LockOutlined />
-                      </span>
+                      <div>
+                        <span className="text-base font-medium">
+                          {item.name}
+                        </span>
+                        <span className="text-gray-500 font-medium ml-sm">
+                          <LockOutlined />
+                        </span>
+                        <div className="text-sm text-gray-500  overflow-hidden  text-ellipsis whitespace-nowrap w-100">
+                          {item.description}
+                        </div>
+                      </div>
                       <div className="ml-auto">
                         <Dropdown
                           menu={{

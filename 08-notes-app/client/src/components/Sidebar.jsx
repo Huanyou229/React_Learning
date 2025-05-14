@@ -132,7 +132,7 @@ const Sidebar = () => {
       icon: <BookOutlined style={{ fontSize: "16px" }} />,
       className: "mt-4",
       onClick: () => {
-        navigate("/categoryList");
+        navigate("/categoryHome");
       },
       children: categories.map((category) => ({
         key: category.id,
