@@ -10,6 +10,7 @@ import {
 import dayjs from "dayjs";
 import utc from "dayjs/plugin/utc";
 import { Divider, Modal, message } from "antd";
+import FooterComponent from "@/pages/note/components/FooterComponent";
 
 dayjs.extend(utc);
 
@@ -87,7 +88,7 @@ const NoteList = () => {
             </div>
 
             {/* 作者 / 分类 */}
-            <div className="text-sm text-gray-600 w-1/3 text-right pr-100">
+            <div className="text-sm text-gray-600 w-1/3 text-left ">
               {item.username} / {item.categoryName}
             </div>
 
@@ -127,6 +128,7 @@ const NoteList = () => {
       >
         <p>确定要删除这条笔记吗？此操作不可恢复。</p>
       </Modal>
+      <FooterComponent />
     </div>
   );
 };

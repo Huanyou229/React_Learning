@@ -37,10 +37,10 @@ const CategoryList = ({ categories }) => {
           <div className="w-1/3 min-w-0 flex items-center ">
             <span className="pr-1">名称</span>
             <div className="flex flex-col  font-size-4 ">
-              <Tooltip title={"点击升序"}>
+              <Tooltip title={"点击升序"} arrow={false}>
                 <CaretUpOutlined className="text-gray-500 hover:text-blue-500 " />
               </Tooltip>
-              <Tooltip title={"点击降序"} placement="bottom">
+              <Tooltip title={"点击降序"} placement="bottom" arrow={false}>
                 <CaretDownOutlined className="text-gray-500 hover:text-blue-500 mt--1" />
               </Tooltip>
             </div>
@@ -50,10 +50,10 @@ const CategoryList = ({ categories }) => {
             <span className="w-[140px] text-left flex items-center">
               <span className="pr-1">更新时间</span>
               <div className="flex flex-col  font-size-4 ">
-                <Tooltip title={"点击升序"}>
+                <Tooltip title={"点击升序"} arrow={false}>
                   <CaretUpOutlined className="text-gray-500 hover:text-blue-500 " />
                 </Tooltip>
-                <Tooltip title={"点击降序"} placement="bottom">
+                <Tooltip title={"点击降序"} placement="bottom" arrow={false}>
                   <CaretDownOutlined className="text-gray-500 hover:text-blue-500 mt--1" />
                 </Tooltip>
               </div>
@@ -72,15 +72,17 @@ const CategoryList = ({ categories }) => {
             <div className="flex items-center justify-between border-b border-gray-200 py-4 px-2">
               {/* 图标 + 标题 */}
               <div className="flex items-center space-x-2 w-1/3 min-w-0">
-                <BookFilled
-                  className="text-blue-500"
-                  style={{ fontSize: "18px", flexShrink: 0 }}
-                />
                 <a
-                  href={`/notes/${item.id}`}
+                  href={`/notes/categories/${item.id}`}
                   className="truncate text-base text-black no-underline hover:text-blue-600"
                 >
-                  {item.name}
+                  <Tooltip title={"文档知识库"} arrow={false}>
+                    <BookFilled
+                      className="text-blue-500"
+                      style={{ fontSize: "18px", flexShrink: 0 }}
+                    />
+                  </Tooltip>
+                  <span className="ml-1 "> {item.name}</span>
                 </a>
               </div>
 
@@ -97,7 +99,7 @@ const CategoryList = ({ categories }) => {
                     .local()
                     .format("YYYY-MM-DD HH:mm:ss")}
                 </span>
-                <Tooltip title="移出常用">
+                <Tooltip title="移出常用" arrow={false}>
                   <PushpinOutlined className="text-gray-500 cursor-pointer hover:text-blue-500" />
                 </Tooltip>
                 <Dropdown
