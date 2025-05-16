@@ -89,7 +89,7 @@ const CollapsibleCategoryPanel = ({ title, categories }) => {
                         <span className="text-gray-500 font-medium ml-sm">
                           <LockOutlined />
                         </span>
-                        <div className="text-sm text-gray-500  overflow-hidden  text-ellipsis whitespace-nowrap w-100">
+                        <div className="w-80 text-sm text-gray-500  overflow-hidden  text-ellipsis whitespace-nowrap ">
                           {item.description}
                         </div>
                       </div>

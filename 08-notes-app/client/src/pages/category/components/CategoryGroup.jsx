@@ -5,7 +5,7 @@ import PropTypes from "prop-types";
 
 const CategoryGroup = ({ categories }) => {
   return (
-    <Row gutter={20}>
+    <Row gutter={24}>
       {categories.map((item) => (
         <Col key={item.id} span={8}>
           <a
@@ -15,15 +15,15 @@ const CategoryGroup = ({ categories }) => {
             <Card
               hoverable
               style={{
-                width: 515,
-                height: 360,
+                width: 450,
+                height: 310,
                 marginTop: 15,
                 marginBottom: 10,
               }}
               cover={
                 <img
                   alt={item.name}
-                  style={{ width: 515, height: 256 }}
+                  style={{ width: 450, height: 220 }}
                   src={
                     item.cover ||
                     "http://hyzhu-oss.oss-cn-hangzhou.aliyuncs.com/category-covers/1747209743241-hh.png"

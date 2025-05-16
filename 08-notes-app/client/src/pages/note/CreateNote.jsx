@@ -5,7 +5,7 @@ import { getCategories } from "@/api/categoryApi";
 import { useStore } from "@/store/userStore";
 import { useNavigate } from "react-router-dom";
 import Navbar from "@/components/Navbar";
-import NoteForm from "@/components/NoteForm";
+import NoteForm from "@/pages/note/components/NoteForm";
 
 const CreateNote = () => {
   const navigate = useNavigate();
