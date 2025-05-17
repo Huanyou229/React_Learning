@@ -1,17 +1,21 @@
 import axiosInstance from "./axiosInstance";
 
+// 创建分类
 export const createCategory = async (categoryData) => {
   return axiosInstance.post("/categories", categoryData);
 };
 
-export const getCategories = async () => {
-  return axiosInstance.get("/categories");
+// 获取分类列表
+export const getCategories = async (userId) => {
+  return axiosInstance.get(`/categories/user/${userId}`);
 };
 
+// 获取单个分类
 export const getCategory = async (categoryId) => {
   return axiosInstance.get(`/categories/${categoryId}`);
 };
 
+// 更新分类
 export const updateCategory = async (categoryId, categoryData) => {
   return axiosInstance.put(`/categories/${categoryId}`, categoryData);
 };

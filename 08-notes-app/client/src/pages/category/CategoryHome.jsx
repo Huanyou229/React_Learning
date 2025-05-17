@@ -27,7 +27,7 @@ const CategoryHome = () => {
 
   const fetchCategoriesData = async () => {
     try {
-      const fetchedCategories = await getCategories();
+      const fetchedCategories = await getCategories(user.id);
       setCategories(fetchedCategories.data);
     } catch (error) {
       console.error("Failed to fetch categories:", error);

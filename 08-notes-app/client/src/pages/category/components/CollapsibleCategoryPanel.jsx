@@ -51,6 +51,7 @@ const CollapsibleCategoryPanel = ({ title, categories }) => {
     <>
       <div className="w-full mb-6 border border-gray-200 rounded-md overflow-hidden shadow-sm">
         {/* 标题区域 */}
+
         <div
           className="flex justify-between items-center p-3 bg-gray-50 cursor-pointer"
           onClick={toggleCollapse}
@@ -76,78 +77,89 @@ const CollapsibleCategoryPanel = ({ title, categories }) => {
             <Row gutter={[16, 16]}>
               {categories.map((item) => (
                 <Col key={item.id} xs={24} sm={12} md={8}>
-                  <Card hoverable className="h-full shadow-sm">
-                    <div className="flex items-center mb-2">
-                      <BookFilled
-                        style={{ fontSize: "22px" }}
-                        className="mr-2 text-blue-500"
-                      />
-                      <div>
-                        <span className="text-base font-medium">
-                          {item.name}
-                        </span>
-                        <span className="text-gray-500 font-medium ml-sm">
-                          <LockOutlined />
-                        </span>
-                        <div className="w-80 text-sm text-gray-500  overflow-hidden  text-ellipsis whitespace-nowrap ">
-                          {item.description}
+                  <a
+                    href={`/notes/categories/${item.id}`}
+                    className="block no-underline"
+                    onClick={(e) => {
+                      // 防止点击下拉菜单时触发跳转
+                      if (e.target.closest(".ant-dropdown-trigger")) {
+                        e.preventDefault();
+                      }
+                    }}
+                  >
+                    <Card hoverable className="h-full shadow-sm">
+                      <div className="flex items-center mb-2">
+                        <BookFilled
+                          style={{ fontSize: "22px" }}
+                          className="mr-2 text-blue-500"
+                        />
+                        <div>
+                          <span className="text-base font-medium">
+                            {item.name}
+                          </span>
+                          <span className="text-gray-500 font-medium ml-sm">
+                            <LockOutlined />
+                          </span>
+                          <div className="w-80 text-sm text-gray-500  overflow-hidden  text-ellipsis whitespace-nowrap ">
+                            {item.description}
+                          </div>
+                        </div>
+                        <div className="ml-auto">
+                          <Dropdown
+                            menu={{
+                              items: [
+                                {
+                                  key: "1",
+                                  icon: <SwapOutlined />,
+                                  label: "移出常用",
+                                },
+                                {
+                                  type: "divider",
+                                },
+                                {
+                                  key: "2",
+                                  icon: <KeyOutlined />,
+                                  label: "权限",
+                                },
+                                {
+                                  key: "3",
+                                  icon: <EditOutlined />,
+                                  label: "编辑",
+                                  onClick: () => handleEdit(item),
+                                },
+                                {
+                                  key: "4",
+                                  icon: <SettingOutlined />,
+                                  label: "更多设置",
+                                },
+                                {
+                                  type: "divider",
+                                },
+                                {
+                                  key: "5",
+                                  // icon: <DeleteOutlined />,
+                                  // 使用 DeleteCategory 组件
+                                  label: (
+                                    <DeleteCategory
+                                      category={item}
+                                      onDeleted={handleDeleted}
+                                    />
+                                  ),
+                                },
+                              ],
+                            }}
+                            trigger={["click"]}
+                            placement="bottomLeft"
+                          >
+                            <EllipsisOutlined
+                              className="text-gray-400 cursor-pointer hover:text-blue-500 transition-colors duration-200"
+                              style={{ fontSize: "16px" }}
+                            />
+                          </Dropdown>
                         </div>
                       </div>
-                      <div className="ml-auto">
-                        <Dropdown
-                          menu={{
-                            items: [
-                              {
-                                key: "1",
-                                icon: <SwapOutlined />,
-                                label: "移出常用",
-                              },
-                              {
-                                type: "divider",
-                              },
-                              {
-                                key: "2",
-                                icon: <KeyOutlined />,
-                                label: "权限",
-                              },
-                              {
-                                key: "3",
-                                icon: <EditOutlined />,
-                                label: "编辑",
-                                onClick: () => handleEdit(item),
-                              },
-                              {
-                                key: "4",
-                                icon: <SettingOutlined />,
-                                label: "更多设置",
-                              },
-                              {
-                                type: "divider",
-                              },
-                              {
-                                key: "5",
-                                // icon: <DeleteOutlined />,
-                                // 使用 DeleteCategory 组件
-                                label: (
-                                  <DeleteCategory
-                                    category={item}
-                                    onDeleted={handleDeleted}
-                                  />
-                                ),
-                              },
-                            ],
-                          }}
-                          trigger={["click"]}
-                          placement="bottomLeft"
-                        >
-                          <EllipsisOutlined
-                            className="text-gray-400 cursor-pointer hover:text-blue-500 transition-colors duration-200"
-                            style={{ fontSize: "16px" }}
-                          />
-                        </Dropdown>
-                      </div>
-                    </div>
-                  </Card>
+                    </Card>
+                  </a>
                 </Col>
               ))}
             </Row>

@@ -1,27 +1,40 @@
 import pool from '../config/db.js';
 
+// 创建分类
 export const createCategory = async (req, res) => {
   try {
-    const { name, description = '', cover = '' } = req.body;
+    const { userId, name, description = '', cover = '' } = req.body;
     const [result] = await pool.query(
-      'INSERT INTO categories (name, description, cover) VALUES (?, ?, ?)',
-      [name, description, cover],
+      'INSERT INTO categories (user_id, name, description, cover) VALUES (?, ?, ?, ?)',
+      [userId, name, description, cover],
     );
-    res.status(201).json({ id: result.insertId, name, description, cover });
-  } catch (err) {
-    res.status(500).json({ error: err.message });
+    res.status(201).json({
+      id: result.insertId,
+      userId,
+      name,
+      description,
+      cover,
+    });
+  } catch (error) {
+    res.status(500).json({ error: error.message });
   }
 };
 
+// 获取当前用户所有分类
 export const getCategories = async (req, res) => {
   try {
-    const [rows] = await pool.query('SELECT * FROM categories');
+    const { userId } = req.params;
+    const [rows] = await pool.query(
+      'SELECT * FROM categories WHERE user_id = ?',
+      [userId],
+    );
     res.status(200).json(rows);
-  } catch (err) {
-    res.status(500).json({ error: err.message });
+  } catch (error) {
+    res.status(500).json({ error: error.message });
   }
 };
 
+// 获取某个分类
 export const getCategory = async (req, res) => {
   try {
     const { id } = req.params;
@@ -31,13 +44,14 @@ export const getCategory = async (req, res) => {
     if (rows.length > 0) {
       res.status(200).json(rows[0]);
     } else {
-      res.status(404).json({ message: 'Category not found' });
+      res.status(404).json({ message: 'Category not found or not yours' });
     }
-  } catch (err) {
-    res.status(500).json({ error: err.message });
+  } catch (error) {
+    res.status(500).json({ error: error.message });
   }
 };
 
+// 更新分类
 export const updateCategory = async (req, res) => {
   try {
     const { id } = req.params;
@@ -52,6 +66,7 @@ export const updateCategory = async (req, res) => {
   }
 };
 
+// 删除分类（校验归属）
 export const deleteCategory = async (req, res) => {
   try {
     const { id } = req.params;

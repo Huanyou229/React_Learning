@@ -54,15 +54,14 @@ const Sidebar = () => {
   useEffect(() => {
     const fetchCategories = async () => {
       try {
-        const response = await getCategories();
+        const response = await getCategories(user.id);
         setCategories(response.data);
       } catch (error) {
         console.error("Failed to fetch categories:", error);
       }
     };
-    fetchCategories();
 
-    // 监听知识库更新事件
+    fetchCategories(); // 监听知识库更新事件
     const handleCategoryUpdate = () => {
       fetchCategories();
     };

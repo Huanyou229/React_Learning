@@ -1,5 +1,14 @@
 import React, { useState, useEffect, useRef } from "react";
-import { Form, Input, Button, Tag, message, Select } from "antd";
+import {
+  Form,
+  Input,
+  Button,
+  Tag,
+  message,
+  Select,
+  Layout,
+  Typography,
+} from "antd";
 import "@toast-ui/editor/dist/toastui-editor.css"; // Toast UI 样式
 import { Editor } from "@toast-ui/react-editor"; // 引入 Toast UI 编辑器
 import { updateNote, getNote } from "@/api/noteApi";
@@ -7,6 +16,9 @@ import { getCategories } from "@/api/categoryApi";
 import { useStore } from "@/store/userStore";
 import { useNavigate, useParams } from "react-router-dom";
 import { uploadFile } from "@/api/uploadApi";
+
+const { Header, Content } = Layout;
+const { Title } = Typography;
 
 const EditNote = () => {
   const navigate = useNavigate();
@@ -24,7 +36,7 @@ const EditNote = () => {
       try {
         const [noteResponse, categoriesResponse] = await Promise.all([
           getNote(noteId),
-          getCategories(),
+          getCategories(user.id),
         ]);
         const fetchedNoteData = noteResponse.data;
         setNoteData(fetchedNoteData);
@@ -86,13 +98,18 @@ const EditNote = () => {
   };
 
   return (
-    <>
-      <div className="p-4">
+    <Layout>
+      <Header className="bg-white shadow-md">
+        <Title level={2} className="text-center">
+          编辑笔记
+        </Title>
+      </Header>
+      <Content>
         <Form
           form={form}
           onFinish={handleSubmit}
           layout="vertical"
-          className="max-w-2xl mx-auto"
+          className="bg-white px-6 rounded-lg shadow-md py-2"
         >
           <Form.Item
             label="标题"
@@ -107,7 +124,7 @@ const EditNote = () => {
               ref={editorRef}
               initialEditType="markdown"
               previewStyle="vertical"
-              height="300px"
+              height="600px"
               placeholder="请输入笔记内容（支持 Markdown）"
               usageStatistics={false}
               hideModeSwitch={true}
@@ -125,11 +142,11 @@ const EditNote = () => {
           </Form.Item>
 
           <Form.Item
-            label="类型"
+            label="知识库"
             name="categoryId"
-            rules={[{ required: true, message: "请选择笔记类型" }]}
+            rules={[{ required: true, message: "请选择笔记所属的知识库" }]}
           >
-            <Select placeholder="请选择笔记类型">
+            <Select placeholder="请选择笔记所属的知识库">
               {categories.map((category) => (
                 <Select.Option key={category.id} value={category.id}>
                   {category.name}
@@ -164,8 +181,8 @@ const EditNote = () => {
             </Button>
           </Form.Item>
         </Form>
-      </div>
-    </>
+      </Content>
+    </Layout>
   );
 };
 

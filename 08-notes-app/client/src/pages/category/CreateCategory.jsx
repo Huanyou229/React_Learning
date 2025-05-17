@@ -4,10 +4,11 @@ import { PlusOutlined, BookFilled, DeleteOutlined } from "@ant-design/icons";
 import { createCategory } from "@/api/categoryApi";
 import PropTypes from "prop-types";
 import { uploadFile } from "@/api/uploadApi";
-
+import { useStore } from "@/store/userStore";
 const CreateCategory = ({ open, onCancel, onSuccess }) => {
   const [form] = Form.useForm();
   const [coverUrl, setCoverUrl] = useState("");
+  const { user } = useStore();
 
   const handleUpload = async ({ file }) => {
     try {
@@ -26,7 +27,12 @@ const CreateCategory = ({ open, onCancel, onSuccess }) => {
   const handleSubmit = async () => {
     try {
       const values = await form.validateFields();
-      await createCategory({ ...values, cover: coverUrl });
+      const categoryData = {
+        ...values,
+        userId: user.id,
+        cover: coverUrl,
+      };
+      await createCategory(categoryData);
       message.success("知识库创建成功");
       form.resetFields();
       setCoverUrl("");
